@@ -1,33 +1,25 @@
-name: Build pipeline
+name: Test pipeline
 
-on:
-  push:
-    branches: [ "main" ]
+on: [push]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 18
 
       - name: Install dependencies
         run: npm install
 
-      - name: Install copyfiles (fix for CI)
-        run: npm install -g copyfiles
+      - name: Run ESLint
+        run: npm run lint
 
-      - name: Build project
-        run: npm run build
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: project-dist
-          path: ./dist
+      - name: Run tests
+        run: npm test
