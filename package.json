@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
+ "scripts": {
   "build": "copyfiles -u 1 public/**/* dist",
   "lint": "eslint custom/**/*.js tests/**/*.js",
   "test": "jest"
